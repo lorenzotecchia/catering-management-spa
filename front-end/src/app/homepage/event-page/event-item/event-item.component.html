@@ -1,0 +1,50 @@
+<div class="bg-white dark:bg-secondary rounded-lg shadow-md overflow-hidden">
+  <div class="p-6">
+    <!-- Event header with actions -->
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        {{ event.eventName}}
+      </h3>
+      <div *ngIf="isMaitre" class="flex space-x-2">
+        <button
+          (click)="edit.emit(event)"
+          class="text-primary hover:text-primary-700 transition-colors">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button
+          (click)="delete.emit(event)"
+          class="text-red-600 hover:text-red-700 transition-colors">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Event details -->
+    <div class="space-y-2">
+      <!-- Date -->
+      <div class="flex items-center text-gray-600 dark:text-gray-300">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        <span>{{ event.eventDate | date:'medium' }}</span>
+      </div>
+
+      <!-- Location -->
+      <div *ngIf="event.eventLocation" class="flex items-center text-gray-600 dark:text-gray-300">
+        <i class="fas fa-map-marker-alt mr-2"></i>
+        <span>{{ event.eventLocation }}</span>
+      </div>
+
+      <!-- Attendees -->
+      <div *ngIf="event.numberOfParticipants " class="flex items-center text-gray-600 dark:text-gray-300">
+        <i class="fas fa-users mr-2"></i>
+        <span>{{ event.numberOfParticipants }} attendees</span>
+      </div>
+
+      <!-- Description preview -->
+<!-- event-item.component.html -->
+<!-- Replace the description paragraph with this -->
+<div *ngIf="event.eventDescription" class="text-gray-700 dark:text-gray-300 mt-2">
+  <markdown [data]="event.eventDescription"></markdown>
+</div>
+    </div>
+  </div>
+</div>

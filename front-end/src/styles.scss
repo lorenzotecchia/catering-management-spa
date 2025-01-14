@@ -1,0 +1,160 @@
+@import 'ngx-toastr/toastr';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3547b9;    /* violet_blue-500 */
+  --secondary: #4067a4;  /* true_blue-500 */
+  --background: #dce0f4; /* lavender-500 */
+  --accent: #3f8889;     /* dark_cyan-500 */
+  --highlight: #2e2bc9;  /* persian_blue-500 */
+
+  --toast-success: #3f8889;  /* dark_cyan-500 */
+  --toast-error: #3547b9;    /* violet_blue-500 */
+  --toast-info: #4067a4;     /* true_blue-500 */
+  --toast-warning: #2e2bc9;  /* persian_blue-500 */
+}
+
+@layer base {
+  :root {
+    --color-primary: theme('colors.violet_blue.500');
+    --color-primary-dark: theme('colors.violet_blue.600');
+    --color-tertiary: theme('colors.dark_cyan.500');
+  }
+
+  html,
+  body {
+    @apply h-full m-0 bg-lavender-500 text-true_blue-900;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  /* Toast Notifications */
+  .toast-container {
+    @apply fixed !important;
+
+    &.toast-bottom-left {
+      @apply bottom-0 left-0 !important;
+      padding: 1rem !important;
+    }
+
+    .ngx-toastr {
+      @apply rounded-lg shadow-lg !important;
+      min-width: 300px !important;
+      max-width: 350px !important;
+      padding: 15px 15px 15px 50px !important;
+    }
+
+    .toast-success {
+      @apply bg-dark_cyan-500 !important;
+    }
+
+    .toast-error {
+      @apply bg-violet_blue-500 !important;
+    }
+
+    .toast-info {
+      @apply bg-true_blue-500 !important;
+    }
+
+    .toast-warning {
+      @apply bg-persian_blue-500 !important;
+    }
+  }
+
+  /* Link Styles */
+  .link {
+    @apply underline text-dark_cyan-500 hover:text-dark_cyan-600
+           dark:text-dark_cyan-400 dark:visited:text-persian_blue-400
+           visited:text-dark_cyan-700;
+  }
+
+  /* Form Styles */
+  .form-error {
+    @apply text-violet_blue-500 dark:text-violet_blue-400 text-sm pt-2;
+  }
+
+  /* Button Styles */
+  .btn {
+    @apply bg-violet_blue-500 text-white px-4 py-2 rounded
+           hover:bg-violet_blue-600 transition-colors duration-200;
+  }
+
+  /* Card Component */
+  .card {
+    @apply bg-white shadow-lg rounded-lg p-4 mb-4 border-lavender-200;
+  }
+
+  /* Layout Components */
+  .container {
+    @apply mx-auto px-4 py-8;
+  }
+
+  .header {
+    @apply w-full bg-violet_blue-500 text-white;
+  }
+
+  .nav {
+    @apply flex;
+  }
+
+  input, textarea {
+    @apply text-gray-900 dark:text-white !important; /* Make text darker/more visible */
+  }
+
+  input::placeholder, textarea::placeholder {
+    @apply text-gray-400 dark:text-gray-400; /* Slightly lighter placeholder text */
+  }
+
+  /* Style for focused state */
+  input:focus, textarea:focus {
+    @apply border-violet_blue-500 ring-1 ring-violet_blue-500 outline-none;
+  }
+
+  /* Update your existing form input base styles */
+  .form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="datetime-local"],
+  textarea {
+    @apply bg-white dark:bg-true_blue-700
+           border border-gray-300 dark:border-true_blue-600
+           text-gray-900 dark:text-white
+           rounded-lg
+           focus:ring-violet_blue-500 focus:border-violet_blue-500
+           block w-full p-2.5;
+  }
+}
+
+#toast-container.toast-bottom-left {
+  @apply bottom-0 left-0 !important;
+  margin: 1rem !important;
+}
+
+.toast-container.toast-bottom-left {
+  position: fixed !important;
+  bottom: 1rem !important;
+  left: 1rem !important;
+}
+
+@screen md {
+  .header {
+    @apply flex justify-between items-center;
+  }
+
+  .nav {
+    @apply flex-row space-x-4;
+  }
+}
+
+@screen lg {
+  .container {
+    @apply px-8;
+  }
+}

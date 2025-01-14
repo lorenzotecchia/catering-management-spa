@@ -1,0 +1,27 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-900">Events Calendar</h2>
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+
+<div *ngIf="selectedEvent"
+     class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+    <!-- Update these text colors to be darker -->
+    <h2 class="text-xl font-bold mb-4 text-gray-900">{{selectedEvent.eventName}}</h2>
+    <p class="mb-2 text-gray-800"><strong class="text-gray-900">Date:</strong> {{selectedEvent.eventDate | date:'medium'}}</p>
+    <p class="mb-2 text-gray-800"><strong class="text-gray-900">Location:</strong> {{selectedEvent.eventLocation}}</p>
+    <p class="mb-2 text-gray-800"><strong class="text-gray-900">Participants:</strong> {{selectedEvent.numberOfParticipants}}</p>
+    <p class="mb-4 text-gray-800">
+      <strong class="text-gray-900">Description:</strong>
+      <span class="ml-1">{{selectedEvent.eventDescription}}</span>
+    </p>
+    <div class="flex justify-end">
+      <button (click)="selectedEvent = null"
+              class="bg-violet_blue-500 text-white px-4 py-2 rounded hover:bg-violet_blue-600 transition-colors">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>

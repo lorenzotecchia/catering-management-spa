@@ -1,0 +1,38 @@
+// src/app/welcomepage/welcomepage.component.sass
+.welcome-page
+  @apply min-h-screen bg-gray-50 p-8
+
+  .stats-card
+    @apply rounded-xl bg-white p-6 shadow-sm transition-all duration-200
+    &:hover
+      @apply shadow-md transform -translate-y-1
+
+  .activity-card
+    @apply rounded-xl bg-white p-6 shadow-sm
+
+    .card-header
+      @apply flex items-center justify-between mb-4
+
+      h2
+        @apply text-lg font-semibold text-gray-900
+
+      a
+        @apply text-sm text-blue-600 hover:text-blue-500
+
+    .activity-list
+      @apply divide-y divide-gray-100
+
+      .activity-item
+        @apply py-4
+
+        .activity-content
+          @apply flex items-center gap-x-3
+
+          .activity-text
+            @apply flex-auto
+
+            .activity-title
+              @apply text-sm font-medium text-gray-900
+
+            .activity-meta
+              @apply mt-1 text-xs text-gray-500

@@ -1,0 +1,157 @@
+<!-- event-creation-form.component.html -->
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-2xl mx-auto bg-white dark:bg-secondary rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+      {{isEditing ? 'Edit Event' : 'Create New Event'}}
+    </h2>
+
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Event Name -->
+      <div>
+        <label for="eventName" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+          Event Name *
+        </label>
+        <input
+          type="text"
+          id="eventName"
+          formControlName="eventName"
+          class="w-full p-3 border rounded-lg"
+          [ngClass]="{'border-red-500': eventName?.invalid && eventName?.touched}"
+          placeholder="Enter event name"
+        >
+        <div *ngIf="eventName?.invalid && eventName?.touched" class="text-red-500 text-sm mt-1">
+          <div *ngIf="eventName?.errors?.['required']">Event name is required</div>
+          <div *ngIf="eventName?.errors?.['minlength']">Event name must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <!-- Event Date -->
+      <div>
+        <label for="eventDate" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+          Event Date *
+        </label>
+        <!-- In event-creation-form.component.html -->
+        <input
+          type="datetime-local"
+          id="eventDate"
+          formControlName="eventDate"
+          class="w-full p-3 border rounded-lg"
+          [ngClass]="{'border-red-500': eventDate?.invalid && eventDate?.touched}"
+          step="any"
+        >
+        <div *ngIf="eventDate?.invalid && eventDate?.touched" class="text-red-500 text-sm mt-1">
+          <div *ngIf="eventDate?.errors?.['required']">Event date is required</div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label for="eventLocation" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+          Location *
+        </label>
+        <input
+          type="text"
+          id="eventLocation"
+          formControlName="eventLocation"
+          class="w-full p-3 border rounded-lg"
+          [ngClass]="{'border-red-500': eventLocation?.invalid && eventLocation?.touched}"
+          placeholder="Enter event location"
+        >
+        <div *ngIf="eventLocation?.invalid && eventLocation?.touched" class="text-red-500 text-sm mt-1">
+          <div *ngIf="eventLocation?.errors?.['required']">Location is required</div>
+          <div *ngIf="eventLocation?.errors?.['minlength']">Location must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <!-- Number of Participants -->
+      <div>
+        <label for="numberOfParticipants" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+          Number of Participants *
+        </label>
+        <input
+          type="number"
+          id="numberOfParticipants"
+          formControlName="numberOfParticipants"
+          class="w-full p-3 border rounded-lg"
+          [ngClass]="{'border-red-500': numberOfParticipants?.invalid && numberOfParticipants?.touched}"
+          min="1"
+          placeholder="Enter number of participants"
+        >
+        <div *ngIf="numberOfParticipants?.invalid && numberOfParticipants?.touched" class="text-red-500 text-sm mt-1">
+          <div *ngIf="numberOfParticipants?.errors?.['required']">Number of participants is required</div>
+          <div *ngIf="numberOfParticipants?.errors?.['min']">Must be at least 1 participant</div>
+        </div>
+      </div>
+
+        <!-- event-creation-form.component.html -->
+        <!-- Update the description field -->
+        <div>
+          <label for="eventDescription" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            Description (Markdown supported)
+          </label>
+          <textarea
+            id="eventDescription"
+            formControlName="eventDescription"
+            rows="4"
+            class="w-full p-3 border rounded-lg"
+            placeholder="Enter event description (supports Markdown formatting)"
+          ></textarea>
+          <div class="text-sm text-gray-500 mt-1">
+            Supports Markdown: **bold**, *italic*, - list items, # headers, etc.
+          </div>
+          <div *ngIf="eventDescription?.invalid && eventDescription?.touched" class="text-red-500 text-sm mt-1">
+            <div *ngIf="eventDescription?.errors?.['maxlength']">Description cannot exceed 500 characters</div>
+          </div>
+        </div>
+
+        <!-- Add a preview section -->
+        <div *ngIf="eventForm.get('eventDescription')?.value" class="mt-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            Preview
+          </label>
+          <div class="p-3 bg-gray-50 rounded-lg">
+            <markdown [data]="eventForm.get('eventDescription')?.value"></markdown>
+          </div>
+        </div>
+
+
+        <!-- event-creation-form.component.html -->
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            Assign Waiters
+          </label>
+          <div class="mt-2 space-y-2">
+            <div class="grid grid-cols-2 gap-4">
+              <div *ngFor="let waiter of waiters" class="flex items-center">
+                <input
+                  type="checkbox"
+                  [value]="waiter.usr"
+                  [checked]="isWaiterSelected(waiter.usr)"
+                  (change)="onWaiterSelectionChange($event, waiter.usr)"
+                  class="h-4 w-4 text-persian_blue-600 focus:ring-persian_blue-500 border-gray-300 rounded"
+                >
+                <label class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                  {{waiter.usr}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Submit buttons -->
+      <div class="flex justify-end space-x-4">
+        <button
+          type="button"
+          (click)="goBack()"
+          class="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [disabled]="eventForm.invalid || isSubmitting"
+          class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{isSubmitting ? 'Saving...' : isEditing ? 'Update Event' : 'Create Event'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<!-- Full width header outside container -->
+<header class="w-full bg-violet_blue-500 shadow-lg">
+  <div class="container mx-auto px-4 py-4">
+    <div class="text-white flex items-center gap-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+        <line x1="9" y1="9" x2="9.01" y2="9"/>
+        <line x1="15" y1="9" x2="15.01" y2="9"/>
+      </svg>
+      <span class="text-2xl font-semibold">CATERING MANAGEMENT</span>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4">
+  <!-- Top Section with Login and Two Images -->
+  <div class="flex flex-col lg:flex-row justify-between items-start mt-16 gap-12">
+    <!-- Left side content -->
+    <div class="max-w-2xl lg:w-1/2">
+      <h1 class="text-5xl mb-4 text-true_blue-500 dark:text-lavender-500">
+        Welcome to Catering Management.
+        <span class="block text-3xl font-normal text-true_blue-400 dark:text-lavender-400 mt-2">
+          This is your all-in-one solution for catering operations.
+        </span>
+      </h1>
+      <div class="mt-8">
+        <a href="/login"
+           class="inline-flex items-center gap-2 px-6 py-3
+                  bg-persian_blue-500 hover:bg-persian_blue-600
+                  text-white rounded-lg transition-colors duration-200
+                  shadow-lg hover:shadow-xl">
+          Log in
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+<!-- Right side images -->
+<div class="lg:w-1/2">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- First image -->
+    <img
+      src="assets/public/preview.png"
+      alt="preview"
+      class="w-full h-auto shadow-xl"
+      style="max-height: 300px; object-fit: contain;"
+    >
+
+    <!-- Second image -->
+    <img
+      src="assets/public/edit-preview.jpg"
+      alt="edit-preview"
+      class="w-full h-auto shadow-xl"
+      style="max-height: 300px; object-fit: contain;"
+    >
+
+    <!-- Third image -->
+    <img
+      src="assets/public/calendar-preview.jpg"
+      alt="third preview"
+      class="w-full h-auto shadow-xl"
+      style="max-height: 300px; object-fit: contain;"
+    >
+
+    <!-- Fourth image -->
+    <img
+      src="assets/public/event-calendar-preview.jpg"
+      alt="fourth preview"
+      class="w-full h-auto shadow-xl"
+      style="max-height: 300px; object-fit: contain;"
+    >
+  </div>
+</div>
+  </div>
+</div>
+
+<!-- Background styling -->
+<style>
+  body {
+    @apply bg-lavender-500 dark:bg-true_blue-900;
+  }
+</style>

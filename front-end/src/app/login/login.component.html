@@ -1,0 +1,109 @@
+<div class="min-h-screen flex items-center justify-center bg-lavender-500 dark:bg-true_blue-900">
+  <div class="w-full max-w-lg bg-white rounded-lg shadow-xl dark:border dark:border-violet_blue-400 md:mt-0 xl:p-0 dark:bg-true_blue-800">
+    <div class="p-8 space-y-6 md:space-y-8 sm:p-10">
+      <!-- Logo/Title -->
+      <div class="flex justify-center mb-8">
+        <a href="#" class="text-3xl font-bold text-violet_blue-500 dark:text-lavender-500 cursor-pointer flex items-center">
+          Catering Management
+        </a>
+      </div>
+
+      <!-- Header -->
+      <h1 class="text-2xl font-bold leading-tight tracking-tight text-true_blue-900 md:text-3xl dark:text-white text-center">
+        Accedi al tuo account
+      </h1>
+
+      <!-- Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="doLogin()" class="space-y-6">
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block mb-2 text-sm font-medium text-true_blue-900 dark:text-lavender-400">
+            Email
+          </label>
+          <input
+            type="email"
+            formControlName="email"
+            id="email"
+            class="bg-lavender-50 border border-lavender-200 text-gray-900 rounded-lg
+                   focus:ring-persian_blue-500 focus:border-persian_blue-500 block w-full p-3
+                   dark:bg-true_blue-700 dark:border-true_blue-600 dark:text-white
+                   dark:placeholder-lavender-400"
+            placeholder="nome@azienda.com"
+            required>
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+               class="text-violet_blue-600 dark:text-violet_blue-400 text-sm mt-1">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block mb-2 text-sm font-medium text-true_blue-900 dark:text-lavender-400">
+            Password
+          </label>
+          <input
+            type="password"
+            formControlName="password"
+            id="password"
+            placeholder="••••••••"
+            class="bg-lavender-50 border border-lavender-200 text-gray-900 rounded-lg
+                   focus:ring-persian_blue-500 focus:border-persian_blue-500 block w-full p-3
+                   dark:bg-true_blue-700 dark:border-true_blue-600 dark:text-white
+                   dark:placeholder-lavender-400"
+            required>
+          <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+               class="text-violet_blue-600 dark:text-violet_blue-400 text-sm mt-1">
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</span>
+          </div>
+        </div>
+
+        <!-- Remember Me & Forgot Password -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="remember"
+                type="checkbox"
+                class="w-4 h-4 border border-lavender-300 rounded bg-lavender-50
+                       focus:ring-3 focus:ring-persian_blue-300
+                       dark:border-true_blue-600 dark:bg-true_blue-700"
+              >
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="remember" class="text-true_blue-600 dark:text-lavender-400">Ricordami</label>
+            </div>
+          </div>
+          <a href="#" class="text-sm font-medium text-persian_blue-500 hover:text-persian_blue-600 dark:text-lavender-400 hover:underline">
+            Password dimenticata?
+          </a>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid || isSubmitting"
+          class="w-full text-white bg-persian_blue-500 hover:bg-persian_blue-600
+                 focus:ring-4 focus:outline-none focus:ring-persian_blue-300
+                 font-medium rounded-lg text-sm px-6 py-3 text-center
+                 dark:bg-persian_blue-600 dark:hover:bg-persian_blue-700
+                 dark:focus:ring-persian_blue-800
+                 disabled:opacity-50 disabled:cursor-not-allowed
+                 transition-colors duration-200">
+          {{ isSubmitting ? 'Accesso in corso...' : 'Accedi' }}
+        </button>
+
+        <!-- Sign Up Link -->
+        <div class="text-sm font-light text-true_blue-600 dark:text-lavender-400 text-center">
+          Non hai un account?
+          <a
+            routerLink="/signup"
+            class="font-medium text-persian_blue-500 hover:text-persian_blue-600
+                   dark:text-lavender-300 hover:underline ml-1
+                   transition-colors duration-200">Registrati</a>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
