@@ -8,12 +8,13 @@ import { EventItem } from './event-item.type';
 import { NotificationItem } from './notification-item';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestBackendService {
-  url = "http://localhost:3000"
+  url = environment.apiUrl;
 
   constructor(
     private http: HttpClient,

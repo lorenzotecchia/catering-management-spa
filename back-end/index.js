@@ -15,7 +15,10 @@ const PORT = 3000;
 // Register the morgan logging middleware, use the 'dev' format
 app.use(morgan('dev'));
 
-app.use(cors()); //API will be accessible from anywhere. We'll talk about this in Lecture 23!
+app.use(cors({
+	origin: ['https://catering-management-app.vercel.app', 'http://localhost:4200'],
+	credentials: true
+}));
 
 // Parse incoming requests with a JSON payload
 app.use(express.json());
