@@ -84,25 +84,25 @@ export class EventController {
 					}
 				});
 
-					// Associate waiters with the event
-					await event.setWaiters(waiters);
-				}
-
-				// Fetch the created event with its associations
-				const createdEvent = await Event.findByPk(event.id, {
-					include: [{
-						model: User,
-						as: 'Waiters',
-						attributes: ['userName', 'role']
-					}]
-				});
-
-				return createdEvent;
-			} catch (error) {
-				console.error('Error saving event:', error);
-				throw new Error(`Error saving event: ${error.message}`);
+				// Associate waiters with the event
+				await event.setWaiters(waiters);
 			}
+
+			// Fetch the created event with its associations
+			const createdEvent = await Event.findByPk(event.id, {
+				include: [{
+					model: User,
+					as: 'Waiters',
+					attributes: ['userName', 'role']
+				}]
+			});
+
+			return createdEvent;
+		} catch (error) {
+			console.error('Error saving event:', error);
+			throw new Error(`Error saving event: ${error.message}`);
 		}
+	}
 
 	// EventController.js
 	// controllers/EventController.js

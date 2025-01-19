@@ -1,8 +1,6 @@
-// models/Database.js
 import { Sequelize } from "sequelize";
 import { createModel as createUserModel } from "./User.js";
 import { createModel as createEventModel } from "./Event.js";
-import { createModel as createNotificationModel } from "./Notification.js";
 import 'dotenv/config.js';
 
 export const database = new Sequelize(process.env.DB_CONNECTION_URI, {
@@ -13,7 +11,6 @@ export const database = new Sequelize(process.env.DB_CONNECTION_URI, {
 // Create models
 const User = createUserModel(database);
 const Event = createEventModel(database);
-const Notification = createNotificationModel(database);
 
 // Set up associations
 User.hasMany(Event);
@@ -34,24 +31,9 @@ User.belongsToMany(Event, {
 	otherKey: 'eventId'
 });
 
-// Notification associations
-User.hasMany(Notification, {
-	foreignKey: 'UserUserName',
-	as: 'Notifications'
-});
-Notification.belongsTo(User, {
-	foreignKey: 'UserUserName'
-});
-Event.hasMany(Notification, {
-	foreignKey: 'EventId',
-	as: 'Notifications'
-});
-Notification.belongsTo(Event, {
-	foreignKey: 'EventId'
-});
 
 // Export models
-export { User, Event, Notification };
+export { User, Event }
 
 // Sync database with more careful error handling
 database.sync({ alter: true })

@@ -5,6 +5,7 @@ import { AuthService } from '../_services/auth/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import { effect } from '@angular/core';
 import { RestBackendService } from '../_services/rest-backend/rest-backend.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ import { RestBackendService } from '../_services/rest-backend/rest-backend.servi
   styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent {
-  unreadNotificationsCount: number = 0;
+  eventsCount: number = 0
 
   get isAuthenticated(): boolean {
     return this.auth.isAuthenticated();
@@ -23,23 +24,31 @@ export class NavbarComponent {
   constructor(
     private restService: RestBackendService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     effect(() => {
-      if (this.auth.isAuthenticated()) {
-        this.loadUnreadNotificationCount();
+      const userRole = localStorage.getItem('userRole')
+      if (this.auth.isAuthenticated() && userRole === 'waiter') {
+        this.loadEventsCount();
       } else {
-        this.unreadNotificationsCount = 0
+        this.eventsCount = 0
       }
     });
   }
 
-  private loadUnreadNotificationCount() {
-    this.restService.getUnreadNotificationsCount().subscribe({
-      next: (count) => {
-        this.unreadNotificationsCount = count
+  private loadEventsCount() {
+    this.restService.getEvents().subscribe({
+      next: (events) => {
+        const count = events.length;
+        if (count > 0) {
+          this.toastr.info(
+            `You have been added to ${count} event${count === 1 ? '' : 's'}`,
+            'Your Events'
+          );
+        }
       },
-      error: (error) => console.error('Error loading notifications', error)
+      error: (error) => console.error('Error loading events:', error)
     })
   }
 

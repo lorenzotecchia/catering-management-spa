@@ -5,8 +5,8 @@ import { authInterceptor } from './_interceptors/auth/auth.interceptor';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideToastr } from 'ngx-toastr'; // Importa ToastrModule
-import { MatIconModule } from '@angular/material/icon'; // Importa MatIconModule
+import { provideToastr } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideMarkdown } from 'ngx-markdown';
 import { FullCalendarModule } from '@fullcalendar/angular';

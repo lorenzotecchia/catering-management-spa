@@ -1,4 +1,4 @@
-import { User, Notification, Event } from "../models/Database.js";
+import { User, Event } from "../models/Database.js";
 import Jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 

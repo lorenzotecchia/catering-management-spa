@@ -1,11 +1,9 @@
-// rest-backend.service.ts
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthRequest } from './auth-request.type';
 import { EventItem } from './event-item.type';
-import { NotificationItem } from './notification-item';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../enviroments/enviroments';
@@ -38,49 +36,16 @@ export class RestBackendService {
     };
   }
 
-  getUnreadNotificationsCount(): Observable<number> {
-    const url = `${this.url}/notification/unread/count`;
-    return this.http.get<number>(url, this.getAuthHeaders()).pipe(
+  getEventsCount(): Observable<number> {
+    return this.getEvents().pipe(
+      map(events => events.length),
       catchError(error => {
-        console.error('Error getting unread notifications count:', error);
-        return of(0); // Return 0 in case of error
+        console.error('Error getting events count:', error);
+        return of(0);
       })
     );
   }
 
-  getNotifications(): Observable<NotificationItem[]> {
-    const url = `${this.url}/notification`;
-    return this.http.get<NotificationItem[]>(url, this.getAuthHeaders()).pipe(
-      tap(notifications => console.log('Fetched notifications:', notifications)),
-      catchError(error => {
-        console.error('Error fetching notifications:', error);
-        return throwError(() => error);
-      })
-    );
-  }
-
-  createNotification(notification: Partial<NotificationItem>): Observable<NotificationItem> {
-    const url = `${this.url}/notification`;
-    console.log('Creating notification:', notification);
-    return this.http.post<NotificationItem>(url, notification, this.getAuthHeaders()).pipe(
-      tap(created => console.log('Created notification:', created)),
-      catchError(error => {
-        console.error('Error creating notification:', error);
-        return throwError(() => error);
-      })
-    );
-  }
-
-
-  markNotificationAsRead(id: number): Observable<NotificationItem> {
-    const url = `${this.url}/notification/${id}/read`;
-    return this.http.patch<NotificationItem>(url, {}, this.getAuthHeaders()).pipe(
-      catchError(error => {
-        console.error('Error marking notification as read:', error);
-        return throwError(() => error);
-      })
-    );
-  }
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';
@@ -141,8 +106,6 @@ export class RestBackendService {
     );
   }
 
-  // rest-backend.service.ts
-  // rest-backend.service.ts
   getEventById(id: number): Observable<EventItem> {
     const url = `${this.url}/event/${id}`;
     return this.http.get<{ success: boolean, data: EventItem }>(url).pipe(
@@ -184,24 +147,6 @@ export class RestBackendService {
       tap(response => console.log('Delete response:', response))
     );
   }
-
-  getNotificationById(id: number): Observable<NotificationItem> {
-    const url = `${this.url}/notification/${id}`;
-    return this.http.get<NotificationItem>(url, this.httpOptions);
-  }
-
-  markAllNotificationsAsRead(): Observable<void> {
-    const url = `${this.url}/notification/read-all`;
-    return this.http.patch<void>(url, {}, this.httpOptions);
-  }
-
-  deleteNotification(id: number): Observable<void> {
-    const url = `${this.url}/notification/${id}`;
-    return this.http.delete<void>(url, this.httpOptions);
-  }
-
-
-
 }
 
 

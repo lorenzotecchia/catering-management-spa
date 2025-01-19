@@ -30,7 +30,6 @@ eventRouter.post("/event", (req, res, next) => {
 });
 
 // Update event
-// eventRouter.js
 eventRouter.put("/event/:id", async (req, res, next) => {
 	try {
 		const updatedEvent = await EventController.updateEvent(req);

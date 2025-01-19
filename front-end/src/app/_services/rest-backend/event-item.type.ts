@@ -1,4 +1,3 @@
-import { NotificationItem } from "./notification-item";
 import { AuthRequest } from "./auth-request.type";
 
 export interface EventItem {
@@ -11,7 +10,6 @@ export interface EventItem {
   createdAt?: Date,
   updatedAt?: Date,
   UserUserName?: string;
-  Notifications?: NotificationItem[]
   Users?: AuthRequest[];
 }
 
