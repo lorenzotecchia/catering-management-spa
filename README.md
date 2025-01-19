@@ -1,6 +1,3 @@
-# TODO:
-- Eliminare profilo
-- Controllare error formatting e messaggi di errori
-- Nel caso popolare footer e navbar:
-    - Footer con link più specifici 
-    - Navbar con link alla documentazione
+Per eseguire il codice è necessario andare nelle rispettive directory ed eseguire:
+`npm start`
+A quel punto dalla directory del front-end basterà premere `o` sulla propria tastiera (per open) e vi si aprirà un'istanza della web-app nel proprio web-browser
